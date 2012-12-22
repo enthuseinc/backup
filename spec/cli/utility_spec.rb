@@ -19,11 +19,12 @@ describe 'Backup::CLI::Utility' do
     it 'should perform the backup for the given trigger' do
       Backup::Logger.expects(:quiet=).in_sequence(s)
       Backup::Config.expects(:update).in_sequence(s)
-      Backup::Config.expects(:load_config!).in_sequence(s)
 
       FileUtils.expects(:mkdir_p).in_sequence(s).with(Backup::Config.log_path)
       FileUtils.expects(:mkdir_p).in_sequence(s).with(Backup::Config.cache_path)
       FileUtils.expects(:mkdir_p).in_sequence(s).with(Backup::Config.tmp_path)
+
+      Backup::Config.expects(:load_config!).in_sequence(s)
 
       Backup::Logger.expects(:truncate!)
 
@@ -40,11 +41,12 @@ describe 'Backup::CLI::Utility' do
     it 'should perform backups for the multiple triggers' do
       Backup::Logger.expects(:quiet=).in_sequence(s)
       Backup::Config.expects(:update).in_sequence(s)
-      Backup::Config.expects(:load_config!).in_sequence(s)
 
       FileUtils.expects(:mkdir_p).in_sequence(s).with(Backup::Config.log_path)
       FileUtils.expects(:mkdir_p).in_sequence(s).with(Backup::Config.cache_path)
       FileUtils.expects(:mkdir_p).in_sequence(s).with(Backup::Config.tmp_path)
+
+      Backup::Config.expects(:load_config!).in_sequence(s)
 
       Backup::Logger.expects(:truncate!)
 
@@ -65,11 +67,12 @@ describe 'Backup::CLI::Utility' do
     it 'should perform backups for the multiple triggers when using wildcard' do
       Backup::Logger.expects(:quiet=).in_sequence(s)
       Backup::Config.expects(:update).in_sequence(s)
-      Backup::Config.expects(:load_config!).in_sequence(s)
 
       FileUtils.expects(:mkdir_p).in_sequence(s).with(Backup::Config.log_path)
       FileUtils.expects(:mkdir_p).in_sequence(s).with(Backup::Config.cache_path)
       FileUtils.expects(:mkdir_p).in_sequence(s).with(Backup::Config.tmp_path)
+
+      Backup::Config.expects(:load_config!).in_sequence(s)
 
       Backup::Logger.expects(:truncate!)
 
@@ -219,7 +222,7 @@ describe 'Backup::CLI::Utility' do
           [--syncers=SYNCERS]          # (cloud_files, rsync_local, rsync_pull, rsync_push, s3)
           [--encryptors=ENCRYPTORS]    # (gpg, openssl)
           [--compressors=COMPRESSORS]  # (bzip2, custom, gzip, lzma, pbzip2)
-          [--notifiers=NOTIFIERS]      # (campfire, hipchat, mail, prowl, twitter)
+          [--notifiers=NOTIFIERS]      # (campfire, hipchat, mail, prowl, pushover, twitter)
           [--archives]
           [--splitter]                 # use `--no-splitter` to disable
                                       # Default: true
